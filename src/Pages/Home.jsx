@@ -46,9 +46,9 @@ const Home = () => {
     //     }
     // }, [])
 
-    useEffect(()=>{
-        navigator.geolocation.getCurrentPosition(success, err, options);
-    }, [geoPermissionState]);
+    // useEffect(()=>{
+    //     navigator.geolocation.getCurrentPosition(success, err, options);
+    // }, [geoPermissionState]);
 
     const d = new Date(2026,1,17,17,55,0,0);
 
