@@ -9,48 +9,51 @@ const Home = () => {
   const [Cols, setCols] = useState(4);
   const [loading, setLoading] = useState(true);
 
-  //Get Location:
+  //   Get Location:
+  const [geoPermissionState, setGeoPermissionState] = useState("");
 
-  // const [geoPermissionState, setGeoPermissionState] = useState('');
+  useEffect(() => {
+    const success = (pos) => {
+      const crd = pos.coords;
+      console.log(
+        `Latitude: ${crd.latitude}, Longitude: ${crd.longitude}, Accuracy: ${crd.accuracy}`
+      );
+    };
 
-  // const success = (pos)=>{
-  //     var crd = pos.coords;
-  //     console.log(`Coordinates Lat: ${crd.latitude} Long: ${crd.longitude}, Accuracy: ${crd.accuracy}`);
-  // }
-  // const err = (errMsg)=>{
-  //     console.log(errMsg);
-  // }
-  // var  options = {
-  //     enableHighAccuracy: true,
-  //     timeout: 5000,
-  //     maximumAge: 0,
-  // }
-  // useEffect(()=>{
-  //     if(navigator.geolocation){
-  //         navigator.permissions.
-  //         query({name: 'geolocation'}).
-  //         then((result)=>{
-  //             console.log(result);
-  //             if(result.state === 'prompt'){
-  //                 navigator.geolocation.getCurrentPosition(success, err, options);
-  //             }
-  //             else if(result.state === 'granted'){
-  //                 navigator.geolocation.getCurrentPosition(success, err, options);
-  //             }
-  //             else if(result.state === 'denied'){
-  //                 alert("Locaiton Permissions Denied. Please Allow Location Permission in site settings");
-  //             }
-  //             result.onchange = ()=>{setGeoPermissionState(result.state)};
-  //         })
-  //     }
-  //     else{
-  //         console.log("geolocation not supported");
-  //     }
-  // }, [])
+    const error = (err) => {
+      console.error(`ERROR(${err.code}): ${err.message}`);
+    };
 
-  // useEffect(()=>{
-  //     navigator.geolocation.getCurrentPosition(success, err, options);
-  // }, [geoPermissionState]);
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0,
+    };
+
+    if (!navigator.geolocation) {
+      console.log("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    navigator.permissions
+      ?.query({ name: "geolocation" })
+      .then((result) => {
+        setGeoPermissionState(result.state);
+        if (result.state === "denied") {
+          alert(
+            "Location permission denied. Please allow it in site settings."
+          );
+        } else {
+          navigator.geolocation.getCurrentPosition(success, error, options);
+        }
+
+        result.onchange = () => setGeoPermissionState(result.state);
+      })
+      .catch(() => {
+        // fallback if `permissions` API not supported
+        navigator.geolocation.getCurrentPosition(success, error, options);
+      });
+  }, [geoPermissionState]);
 
   const d = new Date(2026, 1, 17, 17, 55, 0, 0);
 
