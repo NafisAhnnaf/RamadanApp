@@ -63,7 +63,7 @@ const Home = () => {
 
     let rem = d-c;
     const days =  rem/86400000;
-    const hours = (days - Math.floor(days))*24;
+    const hours = (days - Math.floor(days))*24; 
     const minutes = (hours - Math.floor(hours))*60;
     const seconds = (minutes - Math.floor(minutes))*60;
     //Display status
