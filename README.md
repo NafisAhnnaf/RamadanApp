@@ -1,7 +1,6 @@
 !! Under Development !!
 
-This app aims to work as a Countdown App Primarily focusing on counting time until upcoming Ramadan:
-Stack: MERN
+This React.js app aims to work as a Countdown App Primarily focusing on counting time until upcoming Ramadan:
 
 V 0.1
 	- This version will use static data to calculate the time remaining for Ramadan to arrive. 
