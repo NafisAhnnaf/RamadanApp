@@ -1,7 +1,7 @@
 !! Under Development !!
 
-This app aims to work as a Countdown App Primarily focusing on 
-Ramadan Countdown App:
+This app aims to work as a Countdown App Primarily focusing on counting time until upcoming Ramadan:
+Stack: MERN
 
 V 0.1
 	- This version will use static data to calculate the time remaining for Ramadan to arrive. 
